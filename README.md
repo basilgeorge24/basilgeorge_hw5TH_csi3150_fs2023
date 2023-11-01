@@ -19,7 +19,7 @@ This is a quiz website implemented using HTML, CSS and Vanilla JavaScript. It as
 	- The 'quizApp.js' contains the logic behind the quiz app.
 
 ## Explaination of the Codebase 
-### index.html
+### 1. index.html
 
 - *Lines 8-17:*
 ```
@@ -58,9 +58,9 @@ This section is where you link your CSS, JS and a Font Awesome Kit for icons. Th
    <!-- insert dynamic user score as Result from JavaScript -->
 </div>
 ```
-These section will display their contents dynamically from the JavaScript files. This is made possible using the DOM manipulation in the quizApp.js. The innerHTML attribute in the quizApp.js helps to achieve this.
+These sections will display their contents dynamically from the JavaScript files. This is made possible using the DOM manipulation in the quizApp.js. The innerHTML attribute in the quizApp.js helps to achieve this.
 
-### style.css
+### 2. style.css
 
 - *Lines 14-17*
 ```
@@ -81,7 +81,7 @@ This is a pseudo element that custimzes the appearance of selected text.
 
 - **pointer-events: none**: this CSS property effectively makes the element "invisible" to pointer events, meaning that it won't respond to clicks, hovers, or other interactions.
 
-### questions.js
+### 3. questions.js
 
 - **let questions = [{
 }];**: this is an array of objects. Each object in the array represents a question.
@@ -89,6 +89,102 @@ This is a pseudo element that custimzes the appearance of selected text.
 - **question**: the question
 - **answer**: the correct answer to the question
 - **options**: an array containing of 4 options to choose from.
+
+### 4. quizApp.js
+
+- *Lines 2-15*
+```
+const start_btn = document.querySelector(".start_btn button");
+const info_box = document.querySelector(".info_box");
+const exit_btn = info_box.querySelector(".buttons .quit");
+const continue_btn = info_box.querySelector(".buttons .restart");
+const quiz_box = document.querySelector(".quiz_box");
+const result_box = document.querySelector(".result_box");
+const restart_quiz = result_box.querySelector(".buttons .restart");
+const quit_quiz = result_box.querySelector(".buttons .quit");
+const option_list = document.querySelector(".option_list");
+const time_line = document.querySelector("header .time_line");
+const timeText = document.querySelector(".timer .time_left_txt");
+const timeCount = document.querySelector(".timer .timer_sec");
+const next_btn = document.querySelector("footer .next_btn");
+const bottom_ques_counter = document.querySelector("footer .total_que");
+```
+In this section, we are selecting the various elements from the HTML document using 'document.querySelector()' and storing them in variables which have the datatype of const. These variables are then used in the JavaScript to do their specific needs.
+
+- *Lines 18-35*
+```
+// if startQuiz button clicked
+start_btn.addEventListener("click", (e) => {
+  info_box.classList.add("activeInfo"); //show info box
+});
+
+// if exitQuiz button clicked
+exit_btn.addEventListener("click", (e) => {
+  info_box.classList.remove("activeInfo"); //hide info box
+});
+
+continue_btn.addEventListener("click", (e) => {
+  info_box.classList.remove("activeInfo"); //hide info box
+  quiz_box.classList.add("activeQuiz"); //show quiz box
+  showQuetions(0); //calling showQestions function
+  queCounter(1); //passing 1 parameter to queCounter
+  startTimer(15); //calling startTimer function
+  startTimerLine(0); //calling startTimerLine function
+});
+```
+When the start_btn is clicked, this code makes the info_box element visible by adding the class "activeInfo" to it. This is done to display the rules of the quiz to the user before they start the quiz. 
+When the exit_btn is clicked, this code hides the info_box element by removing the class "activeInfo" from it.
+When the continue_btn is clicked, this code hides the info box, shows the quiz box, displays the questions, updates the question counter, starts a timer, and sets up a visual representation of the timer.
+
+- *Lines 47-63*
+```
+restart_quiz.addEventListener("click", (e) => {
+  quiz_box.classList.add("activeQuiz"); //show quiz box
+  result_box.classList.remove("activeResult"); //hide result box
+  timeValue = 15;
+  que_count = 0;
+  que_numb = 1;
+  userScore = 0;
+  widthValue = 0;
+  showQuetions(que_count); //calling showQestions function
+  queCounter(que_numb); //passing que_numb value to queCounter
+  clearInterval(counter); //clear counter
+  clearInterval(counterLine); //clear counterLine
+  startTimer(timeValue); //calling startTimer function
+  startTimerLine(widthValue); //calling startTimerLine function
+  timeText.textContent = "Time Left"; //change the text of timeText to Time Left
+  next_btn.classList.remove("show"); //hide the next button
+});
+```
+When the restart_quiz button is clicked, this code resets various variables, hides the result box, shows the quiz box, displays the questions, updates the question counter, starts a timer, and sets up a visual representation of the timer. 
+
+- *Lines 71-89*
+```
+next_btn.addEventListener("click", (e) => {
+  //check if it does not exceed max questions
+  if (que_count < questions.length - 1) {
+    que_count++; //increment the que_count value
+    que_numb++; //increment the que_numb value
+    showQuetions(que_count); //calling showQestions function
+    queCounter(que_numb); //passing que_numb value to queCounter
+    clearInterval(counter); //clear counter
+    clearInterval(counterLine); //clear counterLine
+    startTimer(timeValue); //calling startTimer function
+    startTimerLine(widthValue); //calling startTimerLine function
+    timeText.textContent = "Time Left"; //change the timeText to Time Left
+    next_btn.classList.remove("show"); //hide the next button
+  } else {
+    clearInterval(counter); //clear counter
+    clearInterval(counterLine); //clear counterLine
+    showResult(); //calling showResult function
+  }
+});
+```
+When the next_btn is clicked, this code checks if there are more questions to show. If yes, it increments the question count, updates questions, counters, timers, and hides the next button. If there are no more questions, it stops any ongoing timers and displays the quiz result.
+
+
+
+
 
 
 
