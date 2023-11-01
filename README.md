@@ -22,8 +22,10 @@ This is a quiz website implemented using HTML, CSS and Vanilla JavaScript. It as
 ### Index.html
 
 - *Lines 8-17:*
-``` <!-- CSS FILE -->
+```
+    <!-- CSS FILE -->
     <link rel="stylesheet" href="css/style.css">
+
     <!-- This is my personal font awesome kit code. you will have to add your own after you register with email-->
     <script src="https://kit.fontawesome.com/4a4f4b55b0.js" crossorigin="anonymous"></script>
 
@@ -33,16 +35,31 @@ This is a quiz website implemented using HTML, CSS and Vanilla JavaScript. It as
     <!-- Main logic of the app -->
     <script src="js/quizApp.js" defer></script>
 ```
-**Explaination**
 This section is where you link your CSS, JS and a Font Awesome Kit for icons. The 'defer' is a boolean attribute and ensures that the script is executed after the HTML has finished parsing.
 
 - *Lines 50-55*
-  ``` <div class="que_text">
-  	<!-- Insert questions from ./js/questions.js -->
-      </div>
-      <div class="option_list">
-  	<!-- Insert options to questions from ./js/questions.js -->
-      </div>
-  ```
+```
+  <div class="que_text">
+     <!-- Insert questions from ./js/questions.js -->
+  </div>
+  <div class="option_list">
+     <!-- Insert options to questions from ./js/questions.js -->
+  </div>
+```
+- *Lines 60-62*
+```
+  <div class="total_que">
+     <!-- insert Question Count Number dynamically from JavaScript App logic -->
+  </div>
+```
+- *Lines 73-75*
+```
+<div class="score_text">
+   <!-- insert dynamic user score as Result from JavaScript -->
+</div>
+```
+These section will display their contents dynamically from the JavaScript files. This is made possible using the DOM manipulation in the quizApp.js. The innerHTML attribute in the quizApp.js helps to achieve this.
+
+
 
 
