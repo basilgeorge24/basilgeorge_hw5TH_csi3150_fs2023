@@ -182,6 +182,59 @@ next_btn.addEventListener("click", (e) => {
 ```
 When the next_btn is clicked, this code checks if there are more questions to show. If yes, it increments the question count, updates questions, counters, timers, and hides the next button. If there are no more questions, it stops any ongoing timers and displays the quiz result.
 
+- *Lines 204-234*
+```
+function startTimer(time) {
+  counter = setInterval(timer, 1000);
+  function timer() {
+    timeCount.textContent = time; //change the value of timeCount with time value
+    time--; //decrement the time value
+    if (time < 9) {
+      //if timer is less than 9
+      let addZero = timeCount.textContent;
+      timeCount.textContent = "0" + addZero; //add a 0 before time value
+    }
+    if (time < 0) {
+      //if timer is less than 0
+      clearInterval(counter); //clear counter
+      timeText.textContent = "Time Off"; //change the time text to time off
+      const allOptions = option_list.children.length; //get all option items
+      let correcAns = questions[que_count].answer; //get correct answer from array
+      for (i = 0; i < allOptions; i++) {
+        if (option_list.children[i].textContent == correcAns) {
+          //if there is an option which is matched to an array answer
+          option_list.children[i].setAttribute("class", "option correct"); //add green color to matched option
+          option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //add tick icon to matched option
+          console.log("Time Off: Auto selected correct answer.");
+        }
+      }
+      for (i = 0; i < allOptions; i++) {
+        option_list.children[i].classList.add("disabled"); //once user select an option then disabled all options
+      }
+      next_btn.classList.add("show"); //show the next button if user selected any option
+    }
+  }
+}
+```
+This function manages the countdown timer for each question in the quiz. It sets up an interval that calls a timer function every second. The timer function updates the displayed time, decrements the time value, and handles actions when time runs out.
+When time reaches 9 seconds or less, a leading zero is added for single-digit display. When time reaches 0, the timer stops, displays "Time Off," selects the correct answer, disables all options, and reveals the next button for the user to proceed to the next question.
+
+
+- *Lines 237-247*
+```
+function startTimerLine(time) {
+  counterLine = setInterval(timer, 29);
+  function timer() {
+    time += 1; //upgrading time value with 1
+    time_line.style.width = time + "px"; //increasing width of time_line with px by time value
+    if (time > 549) {
+      //if time value is greater than 549
+      clearInterval(counterLine); //clear counterLine
+    }
+  }
+}
+```
+The purpose of this function is to provide a visual representation of the time remaining for each question. As time progresses, the progress bar expands, giving the user a visual cue of the time passing. When the progress bar reaches its maximum width, it indicates that time is up for that particular question.
 
 
 
