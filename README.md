@@ -18,5 +18,31 @@ This is a quiz website implemented using HTML, CSS and Vanilla JavaScript. It as
 	- The 'questions.js' file contains each question, along with the options and the answer enclosed in an array of objects. 
 	- The 'quizApp.js' contains the logic behind the quiz app.
 
+## Explaination of the Codebase 
+### Index.html
+
+- *Lines 8-17:*
+``` <!-- CSS FILE -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- This is my personal font awesome kit code. you will have to add your own after you register with email-->
+    <script src="https://kit.fontawesome.com/4a4f4b55b0.js" crossorigin="anonymous"></script>
+
+     <!-- Add questions list -->
+    <script src="js/questions.js" defer></script>
+
+    <!-- Main logic of the app -->
+    <script src="js/quizApp.js" defer></script>
+```
+**Explaination**
+This section is where you link your CSS, JS and a Font Awesome Kit for icons. The 'defer' is a boolean attribute and ensures that the script is executed after the HTML has finished parsing.
+
+- *Lines 50-55*
+  ``` <div class="que_text">
+  	<!-- Insert questions from ./js/questions.js -->
+      </div>
+      <div class="option_list">
+  	<!-- Insert options to questions from ./js/questions.js -->
+      </div>
+  ```
 
 
